@@ -1,0 +1,94 @@
+---
+id: registro
+title: HU01 - Registro de Cuenta
+sidebar_label: Registro de Cuenta
+slug: /modulos/autenticacion/registro
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# HU01: Registrar una Cuenta
+
+Este módulo permite a los nuevos usuarios crear una cuenta dentro de la plataforma **SyncTeam** mediante registro tradicional (correo electrónico y contraseña) o autenticación de terceros (Google y GitHub)[cite: 1].
+
+---
+
+## 📋 Detalles de la Historia de Usuario
+
+| Propiedad               | Detalle                                                                    |
+| :---------------------- | :------------------------------------------------------------------------- |
+| **Código HU**           | HU01                                                                       |
+| **Título**              | Registrar una cuenta mediante correo y contraseña o mediante Google/GitHub |
+| **Requisito Funcional** | **RF1**: Registro básico y validación de usuario                           |
+| **Prioridad**           | MUST (Obligatorio)                                                         |
+| **Dependencias**        | Ninguna                                                                    |
+
+---
+
+## ⚙️ Reglas de Negocio y Validación (RF1)
+
+1. **Campos Requeridos para Registro Directo:**
+   - **Nombres:** Campo obligatorio[cite: 2].
+   - **Apellidos:** Campo obligatorio[cite: 2].
+   - **Correo Electrónico:** Formato válido (`usuario@dominio.com`)[cite: 2] y no debe estar registrado previamente[cite: 4].
+   - **Contraseña:** Mínimo 6 caracteres[cite: 1, 2].
+
+2. **Acciones Disponibles:**
+   - **Registrarse:** Envía el formulario para su validación e inserción[cite: 1].
+   - **Limpiar:** Restablece todos los campos del formulario a su estado inicial[cite: 1].
+   - **OAuth (Google / GitHub):** Permite autenticación directa sin llenar el formulario manual[cite: 1].
+
+---
+
+## 🎨 Vista de la Interfaz y Estados
+
+A continuación se presentan las pantallas del módulo de registro según los diferentes estados del sistema:
+
+<Tabs>
+  <TabItem value="formulario" label="Formulario Principal" default>
+
+### Formulario de Registro Inicial
+
+Vista principal de la pantalla de registro con los botones de integración OAuth y el formulario desplegado[cite: 1].
+
+![Formulario de Registro](/img/registro-formulario.png)[cite: 1]
+
+  </TabItem>
+  <TabItem value="errores" label="Validación de Errores">
+
+### Muestra de Errores en Tiempo Real
+
+Cuando el usuario intenta enviar el formulario con datos inválidos o incompletos, la interfaz resalta los campos en rojo y despliega los mensajes correspondientes[cite: 2]:
+
+- **Nombres:** _"Los nombres son obligatorios"_[cite: 2]
+- **Apellidos:** _"Los apellidos son obligatorios"_[cite: 2]
+- **Correo electrónico:** _"Formato de correo inválido"_[cite: 2]
+- **Contraseña:** _"La contraseña debe tener al menos 6 caracteres"_[cite: 2]
+
+![Errores de Validación](/img/registro-errores.png)[cite: 2]
+
+  </TabItem>
+  <TabItem value="exitoso" label="Registro Exitoso">
+
+### Confirmación de Registro
+
+Una vez ingresados los datos correctos y procesada la solicitud, el sistema emite una notificación emergente confirmando la creación[cite: 3]:
+
+- **Mensaje:** _"Cuenta creada correctamente"_[cite: 3]
+
+![Registro Exitoso](/img/registro-exitoso.png)[cite: 3]
+
+  </TabItem>
+  <TabItem value="duplicado" label="Correo Ya Existente">
+
+### Validación de Correo Duplicado
+
+Si el correo ingresado ya pertenece a un usuario existente en la base de datos, el sistema bloquea el registro y muestra la siguiente alerta[cite: 4]:
+
+- **Mensaje:** _"Este correo ya está registrado"_[cite: 4]
+
+![Error Correo Registrado](/img/registro-correo-existente.png)[cite: 4]
+
+  </TabItem>
+</Tabs>
