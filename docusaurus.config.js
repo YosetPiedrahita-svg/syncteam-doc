@@ -10,8 +10,8 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "My Site",
-  tagline: "Dinosaurs are cool",
+  title: "Syncteam",
+  tagline: "Documentación oficial de Syncteam",
   favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -42,6 +42,7 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
+          routeBasePath: "/", // <-- Agrega esta línea para que la raíz servida sea la documentación
           editUrl: "https://github.com/YosetPiedrahita-svg/syncteam-doc",
         },
         blog: {
@@ -74,9 +75,9 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: "My Site",
+        title: "Syncteam",
         logo: {
-          alt: "My Site Logo",
+          alt: "Syncteam Logo",
           src: "img/logo.svg",
         },
         items: [
@@ -84,11 +85,10 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "Tutorial",
+            label: "Documentación",
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/YosetPiedrahita-svg/syncteam-doc",
             label: "GitHub",
             position: "right",
           },
@@ -137,7 +137,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Syncteam. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
