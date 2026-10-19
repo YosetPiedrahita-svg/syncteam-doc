@@ -1,0 +1,75 @@
+---
+id: registro-proveedor
+title: HU01 - Registro mediante Proveedor Externo
+sidebar_label: Registro por Proveedor
+slug: /modulos/autenticacion/registro-proveedor
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# HU01: Registro mediante Proveedores Externos (OAuth)
+
+Este submódulo permite a los usuarios autenticarse e inscribirse en la plataforma **SyncTeam** mediante proveedores de identidad externos de confianza, como **Google** y **GitHub**, simplificando el flujo de acceso sin necesidad de ingresar contraseñas manualmente.
+
+---
+
+## 📋 Información de la Historia de Usuario
+
+| Propiedad               | Detalle                                                                             |
+| :---------------------- | :---------------------------------------------------------------------------------- |
+| **Código HU**           | HU01                                                                                |
+| **Título**              | Registrar una cuenta mediante Google/GitHub                                         |
+| **Requisito Funcional** | **RF2**: Registro e inicio de sesión mediante proveedores de autenticación externos |
+| **Prioridad**           | MUST (Obligatorio)                                                                  |
+| **Dependencias**        | Configuración previa de OAuth/Firebase Authentication                               |
+
+---
+
+## ⚙️ Reglas de Negocio y Validación (RF2)
+
+1. **Proveedores de Autenticación Soportados:**
+   - **Google / Gmail**
+   - **GitHub**
+
+2. **Vinculación y Persistencia:**
+   - El sistema vincula automáticamente la cuenta generada por el proveedor externo con el perfil del usuario correspondiente en la base de datos de **SyncTeam**.
+   - Se aplican las mismas validaciones previas de integridad: si el correo obtenido desde el proveedor externo ya se encuentra asociado a una cuenta existente, se mantiene la asociación o se emite el mensaje de verificación correspondiente.
+
+---
+
+## 🎨 Vista de la Interfaz y Flujo de Autenticación
+
+A continuación se ilustra el flujo de autenticación mediante terceros utilizando los componentes gráficos del sistema:
+
+<Tabs>
+  <TabItem value="opciones" label="Selección de Proveedor" default>
+
+### Botones de Autenticación Social
+
+En la parte superior del formulario de registro, el usuario dispone de los accesos directos para iniciar sesión con **Google** o **GitHub**.
+
+![Opciones de Autenticación Social](/img/factor-github-gmail.png)
+
+  </TabItem>
+  <TabItem value="firebase" label="Procesamiento / Firebase Auth">
+
+### Flujo de Redirección y Proveedor
+
+Al seleccionar cualquiera de las opciones, la solicitud es redirigida y procesada mediante el servicio de autenticación (**Firebase Authentication**), gestionando el token seguro e intercambiando la información básica del perfil (nombre, correo y foto de perfil).
+
+![Autenticación con Firebase](/img/registro-autenticacion-firebase.png)
+
+  </TabItem>
+  <TabItem value="exitoso" label="Registro Exitoso">
+
+### Confirmación de Registro
+
+Una vez completado el flujo en el proveedor externo y validada la cuenta en la plataforma, el sistema confirma la creación mostrando la alerta flotante de éxito.
+
+- **Mensaje de Confirmación:** _"Cuenta creada correctamente"_
+
+![Registro Exitoso](/img/registro-exitoso.png)
+
+  </TabItem>
+</Tabs>
